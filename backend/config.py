@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     chunk_overlap: int = 64
     hybrid_top_k: int = 20
     rerank_top_k: int = 5
+    rrf_k: int = 60
     max_retries: int = 3
 
     backend_host: str = "0.0.0.0"
