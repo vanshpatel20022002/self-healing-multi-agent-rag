@@ -87,7 +87,7 @@ python scripts/ingest_documents.py data/samples
 | 3 | BM25 lexical search | Done |
 | 4 | Hybrid retrieval (RRF) | Done |
 | 5 | Cross-encoder reranking | Done |
-| 6 | LangGraph agent nodes | Planned |
+| 6 | LangGraph agent nodes | Done |
 | 7 | Self-healing validator loop | Planned |
 | 8 | FastAPI + SSE streaming | Planned |
 | 9 | Next.js reasoning trace UI | Planned |
