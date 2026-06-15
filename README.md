@@ -86,7 +86,7 @@ python scripts/ingest_documents.py data/samples
 | 2 | Document ingestion + ChromaDB | Done |
 | 3 | BM25 lexical search | Done |
 | 4 | Hybrid retrieval (RRF) | Done |
-| 5 | Cross-encoder reranking | Planned |
+| 5 | Cross-encoder reranking | Done |
 | 6 | LangGraph agent nodes | Planned |
 | 7 | Self-healing validator loop | Planned |
 | 8 | FastAPI + SSE streaming | Planned |
