@@ -73,6 +73,9 @@ pip install -r requirements.txt
 
 # Configure
 copy .env.example .env
+
+# Ingest sample documents into ChromaDB
+python scripts/ingest_documents.py data/samples
 ```
 
 ## Build Progress
@@ -80,7 +83,7 @@ copy .env.example .env
 | # | Feature | Status |
 |---|---|---|
 | 1 | Project scaffold | Done |
-| 2 | Document ingestion + ChromaDB | Planned |
+| 2 | Document ingestion + ChromaDB | Done |
 | 3 | BM25 lexical search | Planned |
 | 4 | Hybrid retrieval (RRF) | Planned |
 | 5 | Cross-encoder reranking | Planned |

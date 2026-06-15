@@ -24,6 +24,7 @@ htmlcov/
 chroma_data/
 data/*.pdf
 data/*.txt
+!data/samples/**
 !data/.gitkeep
 
 # BM25 index
