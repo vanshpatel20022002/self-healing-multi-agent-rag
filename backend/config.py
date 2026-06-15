@@ -9,6 +9,7 @@ class Settings(BaseSettings):
 
     chroma_persist_dir: str = "./chroma_data"
     chroma_collection_name: str = "documents"
+    bm25_persist_dir: str = "./bm25_index"
 
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"

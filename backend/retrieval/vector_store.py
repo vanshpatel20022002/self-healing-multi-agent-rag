@@ -16,6 +16,7 @@ class RetrievedChunk:
     text: str
     metadata: dict
     distance: float | None = None
+    score: float | None = None
 
 
 class VectorStore:

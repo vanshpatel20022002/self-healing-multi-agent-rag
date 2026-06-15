@@ -84,7 +84,7 @@ python scripts/ingest_documents.py data/samples
 |---|---|---|
 | 1 | Project scaffold | Done |
 | 2 | Document ingestion + ChromaDB | Done |
-| 3 | BM25 lexical search | Planned |
+| 3 | BM25 lexical search | Done |
 | 4 | Hybrid retrieval (RRF) | Planned |
 | 5 | Cross-encoder reranking | Planned |
 | 6 | LangGraph agent nodes | Planned |
