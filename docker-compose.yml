@@ -1,0 +1,53 @@
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: self-healing-rag-vllm
+    command: >
+      --model Qwen/Qwen2.5-7B-Instruct-AWQ
+      --quantization awq
+      --max-model-len 4096
+      --gpu-memory-utilization 0.85
+      --host 0.0.0.0
+      --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - huggingface_cache:/root/.cache/huggingface
+    gpus: all
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\"",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 180s
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: self-healing-rag-backend
+    ports:
+      - "8080:8080"
+    environment:
+      VLLM_BASE_URL: http://vllm:8000/v1
+      VLLM_MODEL: Qwen/Qwen2.5-7B-Instruct-AWQ
+      CHROMA_PERSIST_DIR: /app/chroma_data
+      BM25_PERSIST_DIR: /app/bm25_index
+      CORS_ORIGINS: http://localhost:3000
+      BACKEND_HOST: 0.0.0.0
+      BACKEND_PORT: 8080
+    volumes:
+      - ./chroma_data:/app/chroma_data
+      - ./bm25_index:/app/bm25_index
+      - ./data:/app/data
+      - huggingface_cache:/root/.cache/huggingface
+    depends_on:
+      vllm:
+        condition: service_healthy
+
+volumes:
+  huggingface_cache:

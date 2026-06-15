@@ -1,0 +1,20 @@
+# vLLM only (use when running backend locally)
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: self-healing-rag-vllm
+    command: >
+      --model Qwen/Qwen2.5-7B-Instruct-AWQ
+      --quantization awq
+      --max-model-len 4096
+      --gpu-memory-utilization 0.85
+      --host 0.0.0.0
+      --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - huggingface_cache:/root/.cache/huggingface
+    gpus: all
+
+volumes:
+  huggingface_cache:

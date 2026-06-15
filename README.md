@@ -87,6 +87,26 @@ npm install
 npm run dev
 ```
 
+## Docker
+
+Requires Docker Desktop with NVIDIA GPU support enabled.
+
+```bash
+# Full stack: vLLM + backend API
+docker compose up --build
+
+# vLLM only (run backend locally with python scripts/run_api.py)
+docker compose -f docker-compose.vllm.yml up
+```
+
+On first launch, vLLM downloads the model and may take several minutes to become healthy.
+The frontend still runs locally:
+
+```bash
+cd frontend
+npm run dev
+```
+
 ## Build Progress
 
 | # | Feature | Status |
@@ -100,7 +120,7 @@ npm run dev
 | 7 | Self-healing validator loop | Done |
 | 8 | FastAPI + SSE streaming | Done |
 | 9 | Next.js reasoning trace UI | Done |
-| 10 | Docker Compose (vLLM) | Planned |
+| 10 | Docker Compose (vLLM) | Done |
 | 11 | Unit tests | Planned |
 | 12 | Ragas evaluation | Planned |
 
