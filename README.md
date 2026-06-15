@@ -88,7 +88,7 @@ python scripts/ingest_documents.py data/samples
 | 4 | Hybrid retrieval (RRF) | Done |
 | 5 | Cross-encoder reranking | Done |
 | 6 | LangGraph agent nodes | Done |
-| 7 | Self-healing validator loop | Planned |
+| 7 | Self-healing validator loop | Done |
 | 8 | FastAPI + SSE streaming | Planned |
 | 9 | Next.js reasoning trace UI | Planned |
 | 10 | Docker Compose (vLLM) | Planned |

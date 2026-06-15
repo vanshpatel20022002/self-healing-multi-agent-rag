@@ -237,3 +237,19 @@ def validator_node(state: AgentState) -> dict:
             {"passed": passed, "feedback": feedback},
         ),
     }
+
+
+def heal_node(state: AgentState) -> dict:
+    """Increment retry count and trigger the self-healing loop."""
+    retry_count = state.get("retry_count", 0) + 1
+    feedback = state.get("validation_feedback", "")
+
+    return {
+        "retry_count": retry_count,
+        "trace_events": _trace(
+            "heal",
+            "retry_triggered",
+            f"Validation failed. Starting self-healing retry {retry_count}.",
+            {"retry_count": retry_count, "feedback": feedback},
+        ),
+    }
