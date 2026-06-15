@@ -87,6 +87,12 @@ npm install
 npm run dev
 ```
 
+Run tests:
+
+```bash
+pytest
+```
+
 ## Docker
 
 Requires Docker Desktop with NVIDIA GPU support enabled.
@@ -121,7 +127,7 @@ npm run dev
 | 8 | FastAPI + SSE streaming | Done |
 | 9 | Next.js reasoning trace UI | Done |
 | 10 | Docker Compose (vLLM) | Done |
-| 11 | Unit tests | Planned |
+| 11 | Unit tests | Done |
 | 12 | Ragas evaluation | Planned |
 
 ## License
