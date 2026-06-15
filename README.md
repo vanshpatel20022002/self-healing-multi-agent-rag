@@ -93,6 +93,16 @@ Run tests:
 pytest
 ```
 
+Evaluate retrieval quality with Ragas (requires vLLM for full run):
+
+```bash
+# Build retrieval records only
+python scripts/run_ragas_eval.py --dry-run
+
+# Full faithfulness + context precision eval
+python scripts/run_ragas_eval.py
+```
+
 ## Docker
 
 Requires Docker Desktop with NVIDIA GPU support enabled.
@@ -128,7 +138,7 @@ npm run dev
 | 9 | Next.js reasoning trace UI | Done |
 | 10 | Docker Compose (vLLM) | Done |
 | 11 | Unit tests | Done |
-| 12 | Ragas evaluation | Planned |
+| 12 | Ragas evaluation | Done |
 
 ## License
 

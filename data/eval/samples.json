@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What is StateGraph in LangGraph?",
+    "ground_truth": "StateGraph is the primary abstraction. You define a shared state schema, register nodes that read and update state, and compile the graph into an executable application."
+  },
+  {
+    "question": "How does self-healing RAG work in LangGraph?",
+    "ground_truth": "A typical RAG graph includes a retriever, generator, and validator. The validator checks faithfulness and triggers re-retrieval if the answer is unsupported, refining queries until validation passes or a retry limit is reached."
+  },
+  {
+    "question": "What multi-agent patterns does LangGraph support?",
+    "ground_truth": "LangGraph supports supervisor orchestration, parallel fan-out with the Send API, and cyclic graphs where agents loop until a quality threshold is met."
+  },
+  {
+    "question": "How can LangGraph stream agent execution?",
+    "ground_truth": "LangGraph supports streaming via graph.stream() and graph.astream(), emitting node events, state updates, and custom events for live reasoning traces."
+  }
+]

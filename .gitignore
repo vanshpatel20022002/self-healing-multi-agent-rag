@@ -24,7 +24,9 @@ htmlcov/
 chroma_data/
 data/*.pdf
 data/*.txt
+data/eval/results.json
 !data/samples/**
+!data/eval/**
 !data/.gitkeep
 
 # BM25 index
