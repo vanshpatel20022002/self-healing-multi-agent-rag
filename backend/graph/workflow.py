@@ -21,6 +21,17 @@ def route_after_validation(state: AgentState) -> str:
     return "retry"
 
 
+_graph = None
+
+
+def get_graph():
+    """Return a singleton compiled graph."""
+    global _graph
+    if _graph is None:
+        _graph = build_graph()
+    return _graph
+
+
 def build_graph():
     from langgraph.checkpoint.memory import MemorySaver
     from langgraph.graph import END, START, StateGraph
@@ -55,7 +66,7 @@ def build_graph():
 
 def run_query(query: str, thread_id: str = "default") -> AgentState:
     """Execute the self-healing RAG graph for a user query."""
-    app = build_graph()
+    app = get_graph()
     config = {"configurable": {"thread_id": thread_id}}
     initial_state: AgentState = {
         "query": query,
