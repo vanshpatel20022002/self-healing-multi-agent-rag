@@ -22,20 +22,21 @@ def test_load_eval_samples_reads_questions_and_ground_truth() -> None:
     samples_path = Path("data/eval/samples.json")
     samples = load_eval_samples(samples_path)
 
-    assert len(samples) >= 3
+    assert len(samples) >= 14
     assert "LangGraph" in samples[0].question
     assert samples[0].ground_truth
 
 
 def test_build_eval_records_without_answer_generation() -> None:
     samples = load_eval_samples(Path("data/eval/samples.json"))[:1]
-    records = build_eval_records(
+    records, latencies = build_eval_records(
         samples,
         pipeline=FakePipeline(),
         generate_answers=False,
     )
 
     assert len(records) == 1
+    assert len(latencies) == 1
     assert records[0]["question"] == samples[0].question
     assert len(records[0]["contexts"]) == 1
     assert records[0]["answer"] == ""
@@ -52,7 +53,7 @@ def test_run_ragas_evaluation_dry_run_writes_preview(tmp_path: Path) -> None:
     )
 
     assert summary["mode"] == "dry-run"
-    assert summary["samples"] >= 3
+    assert summary["samples"] >= 14
     assert output_path.exists()
     saved = json.loads(output_path.read_text(encoding="utf-8"))
     assert "preview" in saved

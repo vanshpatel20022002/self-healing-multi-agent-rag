@@ -26,7 +26,36 @@ This project implements a **self-healing RAG loop**: when the Validator agent de
 - **Multi-agent LangGraph workflow** — Orchestrator → Retriever → Reranker → Generator → Validator, with conditional retry edges
 - **Real-time reasoning trace** — SSE streams each agent step to the Next.js frontend
 - **Local inference** — vLLM (`Qwen2.5-7B-Instruct-AWQ`) via OpenAI-compatible API
-- **Evaluation** — Ragas faithfulness and context-precision scripts
+- **Evaluation** — Ragas faithfulness & context precision on a 14-question stratified eval set (see [Evaluation](#evaluation))
+
+## Evaluation
+
+Stratified eval on `data/eval/samples.json` (**14 Q&A pairs**, 4 corpus docs in `data/samples/`, `Qwen2.5-7B-Instruct-AWQ` via vLLM).
+
+| Type | Count |
+|---|---:|
+| Direct factual | 3 |
+| Multi-hop | 3 |
+| Keyword / BM25-heavy | 2 |
+| Ambiguous query | 2 |
+| Not-answerable / insufficient context | 2 |
+| Validator retry cases | 2 |
+
+| Metric | Result |
+|---|---:|
+| Faithfulness | 0.73 |
+| Context Precision | 0.71 |
+| Avg Retrieval Latency | 0.28 sec |
+| Validator Retry Rate | 28.6% |
+
+Reproduce:
+
+```bash
+python scripts/ingest_documents.py data/samples
+python scripts/run_ragas_eval.py
+```
+
+Summary metrics are committed in `data/eval/results_summary.json`; full per-record output goes to `data/eval/results.json` (gitignored).
 
 ## Architecture
 
@@ -112,6 +141,24 @@ copy .env.local.example .env.local
 npm install
 npm run dev
 ```
+
+## API
+
+Health check:
+
+```bash
+curl http://localhost:8080/health
+```
+
+Stream a query (SSE). Requires vLLM and ingested documents:
+
+```bash
+curl -N -X POST http://localhost:8080/query \
+  -H "Content-Type: application/json" \
+  -d "{\"query\": \"What is StateGraph in LangGraph?\"}"
+```
+
+`-N` disables curl buffering so `node_start`, trace, and `final_answer` events print as they arrive. Optional `thread_id` in the JSON body reuses conversation state across requests.
 
 Run tests:
 

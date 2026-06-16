@@ -68,22 +68,39 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-surface px-4 py-6 md:px-8">
-      <div className="mx-auto grid h-[calc(100vh-3rem)] max-w-7xl gap-6 lg:grid-cols-[1.4fr_1fr]">
-        <ChatPanel
-          messages={messages}
-          input={input}
-          isLoading={isLoading}
-          onInputChange={setInput}
-          onSubmit={handleSubmit}
-        />
-        <ReasoningTrace traces={traces} isLoading={isLoading} />
-      </div>
-      {error && (
-        <p className="mx-auto mt-4 max-w-7xl rounded-xl border border-danger/40 bg-danger/10 px-4 py-3 text-sm text-red-200">
-          {error}
-        </p>
-      )}
-    </main>
+    <div className="flex min-h-screen flex-col bg-surface">
+      <header className="shrink-0 border-b border-border bg-panel/80 px-6 py-4 backdrop-blur md:px-10">
+        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-white">Self-Healing RAG</h1>
+            <p className="mt-0.5 text-sm text-slate-400">
+              Multi-agent retrieval with live reasoning trace
+            </p>
+          </div>
+          <div className="hidden items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs text-slate-400 sm:flex">
+            <span className="h-2 w-2 rounded-full bg-success" />
+            API connected
+          </div>
+        </div>
+      </header>
+
+      <main className="flex flex-1 flex-col px-4 py-6 md:px-10 md:py-8">
+        <div className="mx-auto grid h-full w-full max-w-[1600px] flex-1 gap-6 lg:grid-cols-2 lg:gap-8">
+          <ChatPanel
+            messages={messages}
+            input={input}
+            isLoading={isLoading}
+            onInputChange={setInput}
+            onSubmit={handleSubmit}
+          />
+          <ReasoningTrace traces={traces} isLoading={isLoading} />
+        </div>
+        {error && (
+          <p className="mx-auto mt-6 w-full max-w-[1600px] rounded-xl border border-danger/40 bg-danger/10 px-4 py-3 text-sm text-red-200">
+            {error}
+          </p>
+        )}
+      </main>
+    </div>
   );
 }

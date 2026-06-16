@@ -8,6 +8,17 @@
 
 body {
   @apply bg-surface text-slate-100 antialiased;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#__next,
+body > div {
+  min-height: 100%;
 }
 
 * {

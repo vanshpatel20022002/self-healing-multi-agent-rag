@@ -1,0 +1,21 @@
+{
+  "run_date": "2026-06-15",
+  "samples": 14,
+  "categories": {
+    "direct_factual": 3,
+    "multi_hop": 3,
+    "keyword_bm25": 2,
+    "ambiguous": 2,
+    "not_answerable": 2,
+    "validator_retry": 2
+  },
+  "corpus": "data/samples/*.md (4 docs)",
+  "model": "Qwen2.5-7B-Instruct-AWQ",
+  "scores": {
+    "faithfulness": 0.73,
+    "context_precision": 0.71
+  },
+  "avg_retrieval_latency_sec": 0.28,
+  "validator_retry_rate_pct": 28.6,
+  "avg_retries_per_query": 0.86
+}
