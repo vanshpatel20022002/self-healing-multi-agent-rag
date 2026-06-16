@@ -1,6 +1,6 @@
 # Self-Healing Multi-Agent RAG System
 
-Production-grade multi-agent RAG with LangGraph, hybrid search (ChromaDB + BM25), cross-encoder reranking, and a self-healing validation loop. FastAPI backend with SSE reasoning trace; Next.js frontend (coming in later commits). Powered by local vLLM.
+Production-grade multi-agent RAG with LangGraph, hybrid search (ChromaDB + BM25), cross-encoder reranking, and a self-healing validation loop. FastAPI backend with SSE reasoning trace and a Next.js frontend for live agent visibility. Powered by local vLLM.
 
 ## Architecture
 
@@ -40,7 +40,7 @@ flowchart TD
 - **Reranker:** `cross-encoder/ms-marco-MiniLM-L-6-v2`
 - **Embeddings:** `sentence-transformers/all-MiniLM-L6-v2`
 - **LLM:** vLLM (`Qwen2.5-7B-Instruct-AWQ`)
-- **Frontend:** Next.js 14 (planned)
+- **Frontend:** Next.js 14 + Tailwind
 
 ## Project Structure
 
@@ -52,11 +52,11 @@ self-healing-multi-agent-rag/
 │   ├── retrieval/          # Ingestion, Chroma, BM25, hybrid, reranker
 │   ├── llm/                # vLLM client
 │   └── eval/               # Ragas evaluation
-├── frontend/               # Next.js UI (later commits)
+├── frontend/               # Next.js reasoning trace UI
 ├── data/                   # Documents to ingest
 ├── requirements.txt
 ├── .env.example
-└── docker-compose.yml      # vLLM stack (later commit)
+└── docker-compose.yml      # vLLM + backend stack
 ```
 
 ## Setup
