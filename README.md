@@ -14,7 +14,7 @@ A production-style multi-agent RAG pipeline that retrieves, reranks, generates, 
 
 ### Live agent trace — response generation
 
-![Multi-agent pipeline generating a grounded response](assets/Response%20Generation.gif)
+![Multi-agent pipeline generating a grounded response](assets/Response-Generation.gif)
 
 ## About
 
