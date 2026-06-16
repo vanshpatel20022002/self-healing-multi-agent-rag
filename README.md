@@ -1,6 +1,32 @@
 # Self-Healing Multi-Agent RAG System
 
-Production-grade multi-agent RAG with LangGraph, hybrid search (ChromaDB + BM25), cross-encoder reranking, and a self-healing validation loop. FastAPI backend with SSE reasoning trace and a Next.js frontend for live agent visibility. Powered by local vLLM.
+A production-style multi-agent RAG pipeline that retrieves, reranks, generates, and **self-corrects** when answers fail validation. Built with LangGraph, hybrid search (ChromaDB + BM25), cross-encoder reranking, FastAPI + SSE streaming, and a Next.js UI with a live reasoning trace. Runs on local vLLM.
+
+## Demo
+
+### UI Overview
+
+![Self-Healing RAG chat and reasoning trace UI](assets/home.png)
+
+### Live agent trace — validation & self-healing
+
+![Validator checks answer faithfulness and triggers retry on failure](assets/validation.gif)
+
+### Live agent trace — response generation
+
+![Multi-agent pipeline generating a grounded response](assets/Response%20Generation.gif)
+
+## About
+
+This project implements a **self-healing RAG loop**: when the Validator agent detects an unfaithful or unsupported answer, the graph routes back through an Orchestrator that refines the query, re-retrieves context, and tries again (up to 3 retries).
+
+**Key capabilities:**
+- **Hybrid retrieval** — ChromaDB semantic search + BM25 lexical search, fused with reciprocal rank fusion (RRF)
+- **Cross-encoder reranking** — `ms-marco-MiniLM-L-6-v2` re-scores top candidates for precision
+- **Multi-agent LangGraph workflow** — Orchestrator → Retriever → Reranker → Generator → Validator, with conditional retry edges
+- **Real-time reasoning trace** — SSE streams each agent step to the Next.js frontend
+- **Local inference** — vLLM (`Qwen2.5-7B-Instruct-AWQ`) via OpenAI-compatible API
+- **Evaluation** — Ragas faithfulness and context-precision scripts
 
 ## Architecture
 
